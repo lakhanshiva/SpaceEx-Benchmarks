@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<sspaceex xmlns="http://www-verimag.imag.fr/xml-namespaces/sspaceex" version="0.2" math="SpaceEx">
+  <component id="pendulum">
+    <param name="x" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="v" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="c" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <param name="x0" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <location id="1" name="always" x="259.0" y="106.5" width="134.0" height="77.0">
+      <flow>x'==v &amp;
+v'==-c*(x-x0)</flow>
+    </location>
+  </component>
+  <component id="collision">
+    <note>Parameters:
+d = distance between penduli at time of collision (radius of left plus radius of right)
+e = factor between 0 and 1 for modelling energy loss at collision</note>
+    <param name="hop" type="label" local="true" />
+    <param name="x_left" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="v_left" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="x_right" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="v_right" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <param name="d" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <param name="e" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <location id="1" name="always" x="278.5" y="194.5" width="163.0" height="63.0">
+      <invariant>x_left + d &lt;= x_right</invariant>
+    </location>
+    <transition source="1" target="1">
+      <label>hop</label>
+      <guard>x_left + d &gt;= x_right &amp; 
+v_left &gt;= v_right</guard>
+      <assignment>v_right' == e*v_left &amp;
+v_left' == e*v_right</assignment>
+      <labelposition x="-74.0" y="-107.0" width="158.0" height="104.0" />
+    </transition>
+  </component>
+  <component id="clock">
+    <param name="t" type="real" local="false" d1="1" d2="1" dynamics="any" />
+    <location id="1" name="A" x="243.0" y="134.0">
+      <invariant>t &lt;= 60</invariant>
+      <flow>t'==1</flow>
+    </location>
+  </component>
+  <component id="sys2">
+    <param name="x1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="v1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="x2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="v2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <bind as="pendulum_1" component="pendulum" x="291.0" y="13.0">
+      <map key="x">x1</map>
+      <map key="v">v1</map>
+      <map key="c">1</map>
+      <map key="x0">0</map>
+    </bind>
+    <bind as="collision_1" component="collision" x="293.0" y="294.0">
+      <map key="x_left">x1</map>
+      <map key="v_left">v1</map>
+      <map key="x_right">x2</map>
+      <map key="v_right">v2</map>
+      <map key="d">0.2</map>
+      <map key="e">1</map>
+    </bind>
+    <bind as="pendulum_2" component="pendulum" x="291.0" y="154.0">
+      <map key="x">x2</map>
+      <map key="v">v2</map>
+      <map key="c">1</map>
+      <map key="x0">0.2</map>
+    </bind>
+  </component>
+  <component id="sys2_t">
+    <param name="x1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="v1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="x2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="v2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="t" type="real" local="true" d1="1" d2="1" dynamics="any" controlled="true" />
+    <bind as="sys2_1" component="sys2" x="238.0" y="36.0">
+      <map key="x1">x1</map>
+      <map key="v1">v1</map>
+      <map key="x2">x2</map>
+      <map key="v2">v2</map>
+    </bind>
+    <bind as="clock_1" component="clock" x="238.0" y="173.0">
+      <map key="t">t</map>
+    </bind>
+  </component>
+  <component id="sys2_spaced">
+    <param name="x1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="v1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="x2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="v2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <bind as="pendulum_1" component="pendulum" x="291.0" y="13.0">
+      <map key="x">x1</map>
+      <map key="v">v1</map>
+      <map key="c">1</map>
+      <map key="x0">0</map>
+    </bind>
+    <bind as="collision_1" component="collision" x="293.0" y="294.0">
+      <map key="x_left">x1</map>
+      <map key="v_left">v1</map>
+      <map key="x_right">x2</map>
+      <map key="v_right">v2</map>
+      <map key="d">0.2</map>
+      <map key="e">1</map>
+    </bind>
+    <bind as="pendulum_2" component="pendulum" x="291.0" y="154.0">
+      <map key="x">x2</map>
+      <map key="v">v2</map>
+      <map key="c">1</map>
+      <map key="x0">0.4</map>
+    </bind>
+  </component>
+  <component id="sys2_spaced_t">
+    <param name="x1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="v1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="x2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="v2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" />
+    <param name="t" type="real" local="true" d1="1" d2="1" dynamics="any" controlled="true" />
+    <bind as="sys2_spaced_1" component="sys2_spaced" x="247.0" y="28.0">
+      <map key="x1">x1</map>
+      <map key="v1">v1</map>
+      <map key="x2">x2</map>
+      <map key="v2">v2</map>
+    </bind>
+    <bind as="clock_1" component="clock" x="247.0" y="165.0">
+      <map key="t">t</map>
+    </bind>
+  </component>
+</sspaceex>

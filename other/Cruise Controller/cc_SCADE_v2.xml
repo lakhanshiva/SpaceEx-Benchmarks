@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<sspaceex xmlns="http://www-verimag.imag.fr/xml-namespaces/sspaceex" version="0.2" math="SpaceEx">
+  <component id="Clock">
+    <param name="t" type="real" local="false" d1="1" d2="1" dynamics="any" placement="east" />
+    <location id="1" name="loc01" x="210.0" y="110.0">
+      <flow>t' == 1</flow>
+    </location>
+  </component>
+  <component id="VehicleAdd">
+    <param name="In1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="In2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="Out1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="east" />
+    <location id="1" name="loc01" x="210.0" y="110.0" width="140.0" height="68.0">
+      <invariant>Out1==In1-In2</invariant>
+    </location>
+  </component>
+  <component id="VehicleGain1">
+    <param name="In1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="east" />
+    <param name="Out1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="Gain" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <location id="1" name="loc01" x="210.0" y="110.0">
+      <invariant>Out1==Gain*In1</invariant>
+    </location>
+  </component>
+  <component id="VehicleIntegrator">
+    <param name="In1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="Out1" type="real" local="false" d1="1" d2="1" dynamics="any" placement="east" />
+    <location id="1" name="loc01" x="210.0" y="110.0">
+      <flow>Out1' == In1</flow>
+    </location>
+  </component>
+  <component id="VehicleIntegrator1">
+    <param name="In1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="Out1" type="real" local="false" d1="1" d2="1" dynamics="any" placement="east" />
+    <location id="1" name="loc01" x="210.0" y="110.0">
+      <flow>Out1' == In1</flow>
+    </location>
+  </component>
+  <component id="VehicleGain">
+    <param name="In1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="Out1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="east" />
+    <param name="Gain" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <location id="1" name="loc01" x="210.0" y="110.0">
+      <invariant>Out1==Gain*In1</invariant>
+    </location>
+  </component>
+  <component id="ControlAdd">
+    <param name="In1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="In2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="Out1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="east" />
+    <location id="1" name="loc01" x="210.0" y="110.0">
+      <invariant>Out1==In1+In2</invariant>
+    </location>
+  </component>
+  <component id="ControlError">
+    <param name="In1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="In2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="Out1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="east" />
+    <location id="1" name="loc01" x="210.0" y="110.0">
+      <invariant>Out1==In1-In2</invariant>
+    </location>
+  </component>
+  <component id="ControlIntegral">
+    <param name="In1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="Out1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="east" />
+    <param name="Gain" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <location id="1" name="loc01" x="210.0" y="110.0">
+      <invariant>Out1==Gain*In1</invariant>
+    </location>
+  </component>
+  <component id="ControlIntegrator">
+    <param name="In1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="Out1" type="real" local="false" d1="1" d2="1" dynamics="any" placement="east" />
+    <location id="1" name="loc01" x="210.0" y="110.0">
+      <flow>Out1' == In1</flow>
+    </location>
+  </component>
+  <component id="ControlProportional">
+    <param name="In1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="west" />
+    <param name="Out1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="east" />
+    <param name="Gain" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <location id="1" name="loc01" x="210.0" y="110.0" width="122.0" height="60.0">
+      <invariant>Out1==Gain*In1</invariant>
+    </location>
+  </component>
+  <component id="varied_reference">
+    <param name="t_local" type="real" local="true" d1="1" d2="1" dynamics="any" />
+    <param name="ref" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" />
+    <param name="ref1" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <param name="ref2" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <param name="ref3" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <param name="ref4" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <location id="1" name="loc1" x="359.0" y="77.0" width="186.0" height="80.0">
+      <invariant>t_local&lt;=10 &amp; ref==ref1</invariant>
+      <flow>t_local'==1</flow>
+    </location>
+    <location id="2" name="loc2" x="359.0" y="189.0" width="188.0" height="80.0">
+      <invariant>10&lt;=t_local&lt;=20 &amp; ref==ref2</invariant>
+      <flow>t_local'==1</flow>
+    </location>
+    <location id="3" name="loc3" x="359.0" y="304.0" width="184.0" height="80.0">
+      <invariant>20&lt;=t_local&lt;=30 &amp; ref==ref3</invariant>
+      <flow>t_local'==1</flow>
+    </location>
+    <location id="5" name="loc4" x="360.0" y="428.0" width="186.0" height="80.0">
+      <invariant>30&lt;=t_local&lt;=40 &amp; ref==ref4</invariant>
+      <flow>t_local'==1</flow>
+    </location>
+    <transition source="1" target="2">
+      <labelposition x="2.0" y="-8.0" />
+    </transition>
+    <transition source="2" target="3">
+      <labelposition x="0.0" y="0.0" />
+    </transition>
+    <transition source="3" target="5">
+      <labelposition x="0.0" y="0.0" />
+    </transition>
+  </component>
+  <component id="noise">
+    <param name="noise" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" />
+    <param name="mean" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <param name="var" type="real" local="false" d1="1" d2="1" dynamics="const" />
+    <location id="1" name="loc1" x="392.0" y="213.0" width="232.0" height="60.0">
+      <invariant>mean-1*var&lt;=noise&lt;=mean+1*var</invariant>
+    </location>
+  </component>
+  <component id="Vehicle">
+    <param name="u" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" x="268.0" y="62.0" placement="west" />
+    <param name="x" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" x="905.0" y="142.0" placement="east" />
+    <param name="v" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" x="760.0" y="192.0" placement="east" />
+    <param name="AddOut1" type="real" local="true" d1="1" d2="1" dynamics="any" controlled="false" x="423.0" y="59.0" placement="east" />
+    <param name="GainOut1" type="real" local="true" d1="1" d2="1" dynamics="any" controlled="false" x="568.0" y="54.0" placement="east" />
+    <param name="Gain1Out1" type="real" local="true" d1="1" d2="1" dynamics="any" controlled="false" x="379.0" y="158.0" placement="east" />
+    <bind component="VehicleAdd" as="Add" x="380.0" y="91.0" width="66.0" height="35.0">
+      <note>This SX Component is used to model &lt;&lt;Sum&gt;&gt; SL Block Type</note>
+      <map key="In1">u</map>
+      <map key="In2">
+        Gain1Out1
+        <link>314.0,167.0</link>
+      </map>
+      <map key="Out1">AddOut1</map>
+    </bind>
+    <bind component="VehicleGain1" as="Gain1" x="517.0" y="167.0" width="80.0" height="32.0">
+      <note>This SX Component is used to model &lt;&lt;Gain&gt;&gt; SL Block Type</note>
+      <map key="In1">v</map>
+      <map key="Out1">Gain1Out1</map>
+      <map key="Gain">50</map>
+    </bind>
+    <bind component="VehicleIntegrator" as="Integrator" x="677.0" y="92.0" width="72.0" height="32.0">
+      <note>Warning: not supported Simulink Block Type.
+
+The current SL2SX version can not handle: Integrator SL Block Type</note>
+      <map key="In1">GainOut1</map>
+      <map key="Out1">v</map>
+    </bind>
+    <bind component="VehicleIntegrator1" as="Integrator1" x="833.0" y="92.0" width="78.0" height="32.0">
+      <note>Warning: not supported Simulink Block Type.
+
+The current SL2SX version can not handle: Integrator SL Block Type</note>
+      <map key="In1">v</map>
+      <map key="Out1">x</map>
+    </bind>
+    <bind component="VehicleGain" as="Gain" x="523.0" y="92.0" width="70.0" height="34.0">
+      <note>This SX Component is used to model &lt;&lt;Gain&gt;&gt; SL Block Type</note>
+      <map key="In1">AddOut1</map>
+      <map key="Out1">GainOut1</map>
+      <map key="Gain">0.001</map>
+    </bind>
+  </component>
+  <component id="Control">
+    <param name="Ref" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" x="185.0" y="70.0" placement="west" />
+    <param name="Speed" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" x="195.0" y="156.0" placement="west" />
+    <param name="u" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" x="814.0" y="67.0" placement="east" />
+    <param name="ProportionalOut1" type="real" local="true" d1="1" d2="1" dynamics="any" controlled="false" x="490.0" y="24.0" placement="east" />
+    <param name="Error1" type="real" local="true" d1="1" d2="1" dynamics="any" controlled="false" x="321.0" y="100.0" placement="east" />
+    <param name="IntegralOut1" type="real" local="true" d1="1" d2="1" dynamics="any" controlled="false" x="424.0" y="140.0" placement="east" />
+    <param name="IntegratorOut1" type="real" local="true" d1="1" d2="1" dynamics="any" controlled="true" x="613.0" y="171.0" placement="east" />
+    <param name="Ki" type="real" local="false" d1="1" d2="1" dynamics="const" controlled="true" />
+    <param name="Kp" type="real" local="false" d1="1" d2="1" dynamics="const" controlled="true" />
+    <bind component="ControlAdd" as="Add" x="701.0" y="97.0" width="80.0" height="37.0">
+      <note>This SX Component is used to model &lt;&lt;Sum&gt;&gt; SL Block Type</note>
+      <map key="In1">
+        ProportionalOut1
+        <link>509.0,35.0</link>
+      </map>
+      <map key="In2">IntegratorOut1</map>
+      <map key="Out1">u</map>
+    </bind>
+    <bind component="ControlError" as="Error" x="251.0" y="102.0" width="66.0" height="35.0">
+      <note>This SX Component is used to model &lt;&lt;Sum&gt;&gt; SL Block Type</note>
+      <map key="In1">Ref</map>
+      <map key="In2">Speed</map>
+      <map key="Out1">Error1</map>
+    </bind>
+    <bind component="ControlIntegral" as="Integral" x="376.0" y="158.0" width="70.0" height="38.0">
+      <note>This SX Component is used to model &lt;&lt;Gain&gt;&gt; SL Block Type</note>
+      <map key="In1">
+        Error1
+        <link>323.0,102.0</link>
+      </map>
+      <map key="Out1">IntegralOut1</map>
+      <map key="Gain">Ki</map>
+    </bind>
+    <bind component="ControlIntegrator" as="Integrator" x="546.0" y="158.0" width="68.0" height="38.0">
+      <note>Warning: not supported Simulink Block Type.
+
+The current SL2SX version can not handle: Integrator SL Block Type</note>
+      <map key="In1">IntegralOut1</map>
+      <map key="Out1">IntegratorOut1</map>
+    </bind>
+    <bind component="ControlProportional" as="Proportional" x="435.0" y="35.0" width="76.0" height="30.0">
+      <note>This SX Component is used to model &lt;&lt;Gain&gt;&gt; SL Block Type</note>
+      <map key="In1">
+        Error1
+        <link>323.0,101.0</link>
+      </map>
+      <map key="Out1">ProportionalOut1</map>
+      <map key="Gain">Kp</map>
+    </bind>
+  </component>
+  <component id="Sensor">
+    <param name="In1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="east" />
+    <param name="In2" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" placement="east" />
+    <param name="Out1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" x="470.0" y="125.0" placement="west" />
+    <bind component="VehicleAdd" as="VehicleAdd_1" x="298.0" y="236.0">
+      <map key="In1">In1</map>
+      <map key="In2">In2</map>
+      <map key="Out1">Out1</map>
+    </bind>
+  </component>
+  <component id="statefllow">
+    <param name="ref" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" x="297.0" y="177.0" />
+    <param name="ref1" type="real" local="false" d1="1" d2="1" dynamics="const" controlled="true" />
+    <param name="ref2" type="real" local="false" d1="1" d2="1" dynamics="const" controlled="true" />
+    <param name="ref3" type="real" local="false" d1="1" d2="1" dynamics="const" controlled="true" />
+    <param name="ref4" type="real" local="false" d1="1" d2="1" dynamics="const" controlled="true" />
+    <bind component="varied_reference" as="varied_reference_1" x="343.0" y="408.0" width="90.0" height="92.0">
+      <map key="ref">ref</map>
+      <map key="ref1">ref1</map>
+      <map key="ref2">ref2</map>
+      <map key="ref3">ref3</map>
+      <map key="ref4">ref4</map>
+    </bind>
+  </component>
+  <component id="CruiseControlSystem">
+    <param name="ReferenceOut1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" x="338.0" y="97.0" placement="east" />
+    <param name="x" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" x="843.0" y="78.0" placement="east" />
+    <param name="v" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" x="845.0" y="142.0" placement="east" />
+    <param name="Control1" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" x="632.0" y="102.0" placement="east" />
+    <param name="t" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="true" x="319.0" y="25.0" />
+    <param name="v_meas" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" x="512.0" y="251.0" />
+    <param name="noise" type="real" local="false" d1="1" d2="1" dynamics="any" controlled="false" x="693.0" y="267.0" />
+    <bind component="Vehicle" as="Vehicle" x="743.0" y="126.0" width="65.0" height="62.0">
+      <note>This SX Component is used to model &lt;&lt;SubSystem&gt;&gt; SL Block Type</note>
+      <map key="u">Control1</map>
+      <map key="x">x</map>
+      <map key="v">v</map>
+    </bind>
+    <bind component="Control" as="Control" x="552.0" y="126.0" width="83.0" height="56.0">
+      <note>This SX Component is used to model &lt;&lt;SubSystem&gt;&gt; SL Block Type</note>
+      <map key="Ref">ReferenceOut1</map>
+      <map key="Speed">
+        v_meas
+        <link>477.0,261.0</link>
+      </map>
+      <map key="u">Control1</map>
+      <map key="Ki">40</map>
+      <map key="Kp">600</map>
+    </bind>
+    <bind component="Clock" as="Clock" x="216.0" y="25.0" width="10.0" height="10.0">
+      <map key="t">t</map>
+    </bind>
+    <bind component="varied_reference" as="varied_reference_1" x="225.0" y="112.0" width="70.0" height="74.0">
+      <map key="ref">ReferenceOut1</map>
+      <map key="ref1">30</map>
+      <map key="ref2">10</map>
+      <map key="ref3">20</map>
+      <map key="ref4">1</map>
+    </bind>
+    <bind component="Sensor" as="Sensor_1" x="621.0" y="261.0">
+      <map key="In1">v</map>
+      <map key="In2">noise</map>
+      <map key="Out1">v_meas</map>
+    </bind>
+    <bind component="noise" as="noise_1" x="788.0" y="276.0" width="72.0" height="38.0">
+      <map key="noise">noise</map>
+      <map key="mean">0</map>
+      <map key="var">0.5</map>
+    </bind>
+  </component>
+</sspaceex>

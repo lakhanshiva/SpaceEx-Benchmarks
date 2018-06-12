@@ -1,0 +1,8 @@
+*.DS_Store
+# only 1 base component
+spaceex_website/circle
+spaceex_website/nonconvex
+spaceex_website/overhead_crane
+spaceex_website/three_tank
+other/Rendezvous
+other/Building
